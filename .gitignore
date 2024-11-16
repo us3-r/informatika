@@ -1,0 +1,8 @@
+.venv
+.idea
+keys
+tests\keys
+tests\.pytest_cache
+*.txt
+*.pem
+settings.json
