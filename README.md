@@ -30,7 +30,6 @@ Outline for the kryptograpy project in python
 - [ ] Generate a key for AES and Twofish
 - [ ] Generate a key pair for RSA
 - [ ] Output keys to a file / read keys from a file
-- [ ] Use a secure random number generator (mby costume made?)
 
 ## Signature Generation and Verification (RSA-PSS)
 - [ ] Generate a signature for a message
