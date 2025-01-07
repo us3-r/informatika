@@ -297,7 +297,7 @@ class EncryptionHandler:
         """
         logger.log_to_stderr(f'[ENC] Encrypting input') if self.verbose else None
         encrypted_text = None
-
+        _type = _type.upper()
         if _type is None or _type not in ['AES', 'TWOFISH', 'RSA']:
             raise errors.InvalidEncryptionType(f'Invalid encryption type: {_type}')
 
@@ -382,7 +382,7 @@ class DecryptionHandler:
             text = text[:-32]
             if not self.chelper.compare_mac(self.chelper.make_bytes(self.secret), text, mac):
                 raise errors.InvalidMAC(f'Invalid MAC')
-
+        _type = _type.upper()
         if _type is None or _type not in ['AES', 'RSA']:
             raise errors.InvalidEncryptionType(f'Invalid encryption type: {_type}')
 

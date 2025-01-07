@@ -45,12 +45,25 @@ def log_to_stderr(msg, level="INFO", logname=True):
     """
     Print to stderr with BBOT logger colors
     """
+    lvlName = level.upper()
+    if not any(x in sys.argv for x in ("-s", "--silent")):
+        lvlShort = f"[{loglevel_mapping.get(level, 'INFO')}]"
+        lvlShort = f"{colorize(lvlShort, level=lvlName)}"
+        if lvlName == "CRITICAL" or lvlName.startswith("HUGE"):
+            msg = colorize(msg, level=lvlName)
+        if logname:
+            msg = f"{lvlShort} {msg}"
+        print(msg, file=sys.stderr)
+
+
+def display_to_stdout(msg, level="INFO", logname=True, return_msg=False):
+    """
+    Print to stdout with BBOT logger colors
+    """
     levelname = level.upper()
     if not any(x in sys.argv for x in ("-s", "--silent")):
-        levelshort = f"[{loglevel_mapping.get(level, 'INFO')}]"
-        levelshort = f"{colorize(levelshort, level=levelname)}"
-        if levelname == "CRITICAL" or levelname.startswith("HUGE"):
-            msg = colorize(msg, level=levelname)
-        if logname:
-            msg = f"{levelshort} {msg}"
-        print(msg, file=sys.stderr)
+        msg = colorize(msg, level=levelname)
+        if return_msg:
+            return msg
+        else:
+            print(msg, file=sys.stdout)
